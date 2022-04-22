@@ -11,7 +11,9 @@ const app = express();
 // For parsing application/x-www-form-urlencoded
 app.use(express.json())
 
-const port = process.env.SERVER_PORT;
+// const port = process.env.SERVER_PORT;
+
+const port = 8080
 
 // including the routes file which includes all the routes
 const routes = require('./routes/routes')(router);
