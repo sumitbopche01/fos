@@ -71,7 +71,7 @@ exports.updateBookedConferenceRoomsSlots = async (req, res) => {
     !endTime ||
     !bookedCapacity
   ) {
-    return res.send({ message: "Required fileds is/are missing" }).status(422);
+    return res.send({ message: "Required fields is/are missing" }).status(422);
   }
   //check if that particular slot for that conference room is already booked or not
   // const checkData = await ConferenceRoomBooking.find({

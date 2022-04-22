@@ -3,6 +3,7 @@ const CafeteriaController = require("../controller/cafeteriaController");
 const TableTennisController = require("../controller/tableTennisController");
 const ConferenceRoomController = require("../controller/conferenceRoomController");
 const FoodItemsController = require("../controller/foodItemsController");
+const TableTenningBookingController = require("../controller/tableTennisBookingController");
 
 module.exports = (router) => {
   router.get("/", (req, res) => {
@@ -27,17 +28,41 @@ module.exports = (router) => {
   router.put("/table_tennis/:id", TableTennisController.update);
   router.delete("/table_tennis/:id", TableTennisController.delete);
 
+  //Table Tennis Table booking
+  router.get(
+    "/table_tennis/booked/slots",
+    TableTenningBookingController.getBookedTtTableSlots
+  );
+  router.post("/table_tennis/book", TableTenningBookingController.bookTtTable);
+  router.put("/table_tennis/booked/:id", TableTenningBookingController.updateBookedTtTableSlots);
+  router.delete(
+    "/table_tennis/booked/:id",
+    TableTenningBookingController.deleteBookedTtTableSlots
+  );
+
   //Conference Room APIs
   router.get("/conference_room", ConferenceRoomController.getAll);
   router.post("/conference_room", ConferenceRoomController.create);
   router.put("/conference_room/:id", ConferenceRoomController.update);
   router.delete("/conference_room/:id", ConferenceRoomController.delete);
-  
+
   // Conference Room Booking
-  router.post("/conference_room/book", ConferenceRoomController.bookConferenceRoom);
-  router.get("/conference_room/booked/slots", ConferenceRoomController.getBookedConferenceRoomsSlots);
-  router.put("/conference_room/booked/:id", ConferenceRoomController.updateBookedConferenceRoomsSlots);
-  router.delete("/conference_room/booked/:id", ConferenceRoomController.deleteBookedConferenceRoomsSlots);
+  router.post(
+    "/conference_room/book",
+    ConferenceRoomController.bookConferenceRoom
+  );
+  router.get(
+    "/conference_room/booked/slots",
+    ConferenceRoomController.getBookedConferenceRoomsSlots
+  );
+  router.put(
+    "/conference_room/booked/:id",
+    ConferenceRoomController.updateBookedConferenceRoomsSlots
+  );
+  router.delete(
+    "/conference_room/booked/:id",
+    ConferenceRoomController.deleteBookedConferenceRoomsSlots
+  );
 
   //Food Items APIs
   router.get("/food_items", FoodItemsController.getAll);
