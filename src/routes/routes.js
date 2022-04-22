@@ -4,6 +4,7 @@ const TableTennisController = require("../controller/tableTennisController");
 const ConferenceRoomController = require("../controller/conferenceRoomController");
 const FoodItemsController = require("../controller/foodItemsController");
 const TableTenningBookingController = require("../controller/tableTennisBookingController");
+const CafeteriaBookingController = require("../controller/cafeteriaBookingController");
 
 module.exports = (router) => {
   router.get("/", (req, res) => {
@@ -22,6 +23,22 @@ module.exports = (router) => {
   router.put("/cafeteria/:id", CafeteriaController.update);
   router.delete("/cafeteria/:id", CafeteriaController.delete);
 
+  //Cafeteria Booking APIs
+  //Table Tennis Table booking
+  router.get(
+    "/cafeteria/booked/slots",
+    CafeteriaBookingController.getBookedCafeteriaSlots
+  );
+  router.post("/cafeteria/book", CafeteriaBookingController.bookCafeteria);
+  router.put(
+    "/cafeteria/booked/:id",
+    CafeteriaBookingController.updateCafeteriaSlots
+  );
+  router.delete(
+    "/cafeteria/booked/:id",
+    CafeteriaBookingController.deleteBookedCafeteriaSlots
+  );
+
   //Table Tennis APIs
   router.get("/table_tennis", TableTennisController.getAll);
   router.post("/table_tennis", TableTennisController.create);
@@ -34,7 +51,10 @@ module.exports = (router) => {
     TableTenningBookingController.getBookedTtTableSlots
   );
   router.post("/table_tennis/book", TableTenningBookingController.bookTtTable);
-  router.put("/table_tennis/booked/:id", TableTenningBookingController.updateBookedTtTableSlots);
+  router.put(
+    "/table_tennis/booked/:id",
+    TableTenningBookingController.updateBookedTtTableSlots
+  );
   router.delete(
     "/table_tennis/booked/:id",
     TableTenningBookingController.deleteBookedTtTableSlots
