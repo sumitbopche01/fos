@@ -1,12 +1,12 @@
 const CafeteriaBooking = require("../models/cafeteriaBooking");
 
 exports.bookCafeteria = async (req, res) => {
-    const { cafeteriaId, userId, startTime, endTime, bookedCapacity } =
+    const { cafeteriaId, username, startTime, endTime, bookedCapacity } =
       req.body;
   
     if (
       !cafeteriaId ||
-      !userId ||
+      !username ||
       !startTime ||
       !endTime
       
@@ -22,7 +22,7 @@ exports.bookCafeteria = async (req, res) => {
     // if available then book
     const createBooking = await CafeteriaBooking.create({
       cafeteriaId,
-      userId,
+      username,
       startTime,
       endTime
     });
@@ -36,12 +36,12 @@ exports.bookCafeteria = async (req, res) => {
   };
   
   exports.updateCafeteriaSlots = async (req, res) => {
-    const { cafeteriaId, userId, startTime, endTime } =
+    const { cafeteriaId, username, startTime, endTime } =
       req.body;
   
     if (
       !cafeteriaId ||
-      !userId ||
+      !username ||
       !startTime ||
       !endTime
     ) {
@@ -58,7 +58,7 @@ exports.bookCafeteria = async (req, res) => {
       req.params.id,
       {
         cafeteriaId,
-        userId,
+        username,
         startTime,
         endTime
       }
@@ -73,4 +73,3 @@ exports.bookCafeteria = async (req, res) => {
   
     return res.send({ message: "Booking Deleted Successfully" });
   };
-  
