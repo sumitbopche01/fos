@@ -25,15 +25,9 @@ exports.delete = async (req, res) => {
 };
 
 exports.bookConferenceRoom = async (req, res) => {
-  const { conferenceRoomId, username, startTime, endTime } =
-    req.body;
+  const { conferenceRoomId, username, startTime, endTime } = req.body;
 
-  if (
-    !conferenceRoomId ||
-    !username ||
-    !startTime ||
-    !endTime
-  ) {
+  if (!conferenceRoomId || !username || !startTime || !endTime) {
     return res.send({ message: "Required fileds is/are missing" }).status(422);
   }
   //check if that particular slot for that conference room is already booked or not
@@ -47,7 +41,7 @@ exports.bookConferenceRoom = async (req, res) => {
     conferenceRoomId,
     username,
     startTime,
-    endTime
+    endTime,
   });
 
   return res.send({ message: "Booking Created Successfully" });
@@ -55,19 +49,23 @@ exports.bookConferenceRoom = async (req, res) => {
 };
 
 exports.getBookedConferenceRoomsSlots = async (req, res) => {
-  return res.send(await ConferenceRoomBooking.find());
+  let result = [];
+  if (req.query.username) {
+    result = await ConferenceRoomBooking.find({
+      username: req.query.username,
+    });
+
+  } else {
+    result = await ConferenceRoomBooking.find();
+  }
+
+  return res.send(result);
 };
 
 exports.updateBookedConferenceRoomsSlots = async (req, res) => {
-  const { conferenceRoomId, username, startTime, endTime } =
-    req.body;
+  const { conferenceRoomId, username, startTime, endTime } = req.body;
 
-  if (
-    !conferenceRoomId ||
-    !username ||
-    !startTime ||
-    !endTime
-  ) {
+  if (!conferenceRoomId || !username || !startTime || !endTime) {
     return res.send({ message: "Required fields is/are missing" }).status(422);
   }
   //check if that particular slot for that conference room is already booked or not
@@ -83,7 +81,7 @@ exports.updateBookedConferenceRoomsSlots = async (req, res) => {
       conferenceRoomId,
       username,
       startTime,
-      endTime
+      endTime,
     }
   );
 
