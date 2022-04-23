@@ -5,8 +5,8 @@ const ConferenceRoomBookingSchema = new Schema(
   {
     conferenceRoomId: { type: Schema.Types.ObjectId, ref: "ConferenceRoom" },
     username: { type: String, required: true },
-    startTime: { type: Date, required: true },
-    endTime: { type: Date, required: true },
+    startTime: { type: String, required: true },
+    endTime: { type: String, required: true },
     bookedCapacity: { type: Number, required: false },
   },
   {
