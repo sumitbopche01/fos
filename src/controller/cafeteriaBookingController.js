@@ -8,8 +8,8 @@ exports.bookCafeteria = async (req, res) => {
       !cafeteriaId ||
       !userId ||
       !startTime ||
-      !endTime ||
-      !bookedCapacity
+      !endTime
+      
     ) {
       return res.send({ message: "Required fileds is/are missing" }).status(422);
     }
@@ -24,8 +24,7 @@ exports.bookCafeteria = async (req, res) => {
       cafeteriaId,
       userId,
       startTime,
-      endTime,
-      bookedCapacity,
+      endTime
     });
   
     return res.send({ message: "Booking Created Successfully" });
@@ -37,15 +36,14 @@ exports.bookCafeteria = async (req, res) => {
   };
   
   exports.updateCafeteriaSlots = async (req, res) => {
-    const { cafeteriaId, userId, startTime, endTime, bookedCapacity } =
+    const { cafeteriaId, userId, startTime, endTime } =
       req.body;
   
     if (
       !cafeteriaId ||
       !userId ||
       !startTime ||
-      !endTime ||
-      !bookedCapacity
+      !endTime
     ) {
       return res.send({ message: "Required fields is/are missing" }).status(422);
     }
@@ -62,8 +60,7 @@ exports.bookCafeteria = async (req, res) => {
         cafeteriaId,
         userId,
         startTime,
-        endTime,
-        bookedCapacity,
+        endTime
       }
     );
   
@@ -76,3 +73,4 @@ exports.bookCafeteria = async (req, res) => {
   
     return res.send({ message: "Booking Deleted Successfully" });
   };
+  
