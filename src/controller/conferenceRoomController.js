@@ -25,15 +25,14 @@ exports.delete = async (req, res) => {
 };
 
 exports.bookConferenceRoom = async (req, res) => {
-  const { conferenceRoomId, userId, startTime, endTime, bookedCapacity } =
+  const { conferenceRoomId, username, startTime, endTime } =
     req.body;
 
   if (
     !conferenceRoomId ||
-    !userId ||
+    !username ||
     !startTime ||
-    !endTime ||
-    !bookedCapacity
+    !endTime
   ) {
     return res.send({ message: "Required fileds is/are missing" }).status(422);
   }
@@ -46,10 +45,9 @@ exports.bookConferenceRoom = async (req, res) => {
   // if available then book
   const createBooking = await ConferenceRoomBooking.create({
     conferenceRoomId,
-    userId,
+    username,
     startTime,
-    endTime,
-    bookedCapacity,
+    endTime
   });
 
   return res.send({ message: "Booking Created Successfully" });
@@ -61,15 +59,14 @@ exports.getBookedConferenceRoomsSlots = async (req, res) => {
 };
 
 exports.updateBookedConferenceRoomsSlots = async (req, res) => {
-  const { conferenceRoomId, userId, startTime, endTime, bookedCapacity } =
+  const { conferenceRoomId, username, startTime, endTime } =
     req.body;
 
   if (
     !conferenceRoomId ||
-    !userId ||
+    !username ||
     !startTime ||
-    !endTime ||
-    !bookedCapacity
+    !endTime
   ) {
     return res.send({ message: "Required fields is/are missing" }).status(422);
   }
@@ -84,10 +81,9 @@ exports.updateBookedConferenceRoomsSlots = async (req, res) => {
     req.params.id,
     {
       conferenceRoomId,
-      userId,
+      username,
       startTime,
-      endTime,
-      bookedCapacity,
+      endTime
     }
   );
 
