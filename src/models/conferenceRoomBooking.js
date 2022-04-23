@@ -4,14 +4,17 @@ const Schema = mongoose.Schema;
 const ConferenceRoomBookingSchema = new Schema(
   {
     conferenceRoomId: { type: Schema.Types.ObjectId, ref: "ConferenceRoom" },
-    userId: { type: Schema.Types.ObjectId, ref: "Users" },
+    username: { type: String, required: true },
     startTime: { type: Date, required: true },
     endTime: { type: Date, required: true },
-    bookedCapacity: { type: Number, required: true },
+    bookedCapacity: { type: Number, required: false },
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("ConferenceRoomBooking", ConferenceRoomBookingSchema);
+module.exports = mongoose.model(
+  "ConferenceRoomBooking",
+  ConferenceRoomBookingSchema
+);
